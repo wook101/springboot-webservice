@@ -9,8 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -43,4 +45,26 @@ public class PostsRepositoryTest {
         assertEquals(posts.getContent(),"테스트 본문");
 
     }
+
+    //JPA Auditing 테스트
+    @Test
+    public void BaseTimeEntity_등록(){
+        //given
+        LocalDateTime now = LocalDateTime.now();
+        postsRepository.save(Posts.builder()
+                .title("테스트 제목")
+                .content("테스트 본문")
+                .author("asdfasdf")
+                .build());
+        //when
+        List<Posts> postsList = postsRepository.findAll();
+
+        //then
+        Posts post = postsList.get(0);
+        assertTrue(post.getCreatedDate().isAfter(now));
+        assertTrue(post.getModifiedDate().isAfter(now));
+
+    }
+
+
 }
