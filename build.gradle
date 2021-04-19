@@ -21,7 +21,6 @@ repositories {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'junit:junit:4.12'
     compileOnly 'org.projectlombok:lombok'
@@ -30,6 +29,8 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     //추가
     implementation "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+    //템플릿 엔진을 handlebars로 설정
+    implementation 'pl.allegro.tech.boot:handlebars-spring-boot-starter:0.3.0'
 }
 //Spring Boot Overriding
 ext['hibernate.version'] = '5.2.11.Final' //추가
